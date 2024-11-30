@@ -22,6 +22,11 @@ export default {
             transform: 'scale(1.1)', 
           }
         }
+      },
+      screens: {
+        'sm': '400px',
+        // => @media (min-width: 576px) { ... }
+  
       }
     
     },
