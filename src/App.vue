@@ -5,6 +5,7 @@ import { Icon } from '@iconify/vue';
 import sistemproject from './assets/sistemainventario.png'
 import batataproject from './assets/batatabit.png'
 import aboutImage from './assets/fotoperfil.png';
+import Swal from "sweetalert2";
 
 const projects = ref([
   {
@@ -47,6 +48,27 @@ const toggleMenu = () => {
   menuOpen.value = !menuOpen.value;
 };
 
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text)
+    .then(() => {
+      Swal.fire({
+        icon: "success",
+        title: "¡Copiado!",
+        text: "Dirección de Gmail copiada al portapapeles.",
+        timer: 2500,
+        showConfirmButton: false
+      });
+    })
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo copiar la dirección al portapapeles.",
+      });
+      console.error("Error al copiar al portapapeles: ", err);
+    });
+}
 </script>
 
 <template>
@@ -197,9 +219,15 @@ const toggleMenu = () => {
               class="text-gray-600 hover:text-purple-600 transition-colors">
               <Icon icon="mdi:linkedin" class="w-10 h-10" />
             </a>
-            <a href="luisabarrios01@gmail.com" class="text-gray-600 hover:text-purple-600 transition-colors">
-              <Icon icon="mdi:email" class="w-10 h-10" />
-            </a>
+            <button
+          class="text-gray-600 hover:text-purple-600 transition-colors relative group"
+          v-on:click="copyToClipboard('luisabarrios01@gmail.com')">
+          <Icon icon="mdi:email" class="w-10 h-10" />
+          <span
+            class="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-5 py-1 text-xs bg-gray-700 text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+            Copiar dirección de Gmail
+          </span>
+        </button>
             <a href="https://wa.me/5493758430739" target="_blank"
               class="text-gray-600 hover:text-purple-600 transition-colors">
               <Icon icon="mdi:whatsapp" class="w-10 h-10" />
